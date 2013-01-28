@@ -1,14 +1,15 @@
 function timeFormat(input) {
-	return input.getHours() + ':' + (input.getMinutes() < 10 ? '0' + input.getMinutes() : input.getMinutes() );
+	return input.format('HH:mm');
 }
 
 function isoDate(input) {
 	// format the date
 	// because 0-index months are a GREAT idea
 
-	var mo = Math.abs(input.getMonth() + 1);
-	var da = Math.abs(input.getDate());
-	return input.getFullYear() + '-' + (mo < 10 ? '0' + mo : mo) + '-' + (da < 10 ? '0' + da : da);
+	//var mo = Math.abs(input.getMonth() + 1);
+	//var da = Math.abs(input.getDate());
+	//return input.getFullYear() + '-' + (mo < 10 ? '0' + mo : mo) + '-' + (da < 10 ? '0' + da : da);
+	return input.format('YYYY-MM-DD');
 }
 
 function parseTimeDelta(input) {
@@ -19,6 +20,9 @@ function parseTimeDelta(input) {
 	return Math.abs(60 * toks[0]) + Math.abs(toks[1]) + Math.abs(toks[2] / 60);
 }
 
+$(document).bind("mobileinit", function(){
+	$.mobile.ajaxEnabled = false;
+});
 
 $('#scheduleMain').live('pageinit', function(evt) {
 	$.mobile.loading('show', {text: 'Loading the schedule...', textVisible: true});
@@ -48,7 +52,7 @@ $('#scheduleMain').live('pageinit', function(evt) {
 			'room': e['Room Name'],
 			'name': e.Title,
 			// no tzinfo on the start time, wat
-			'start': new Date(e.Start),
+			'start': moment(e.Start.replace(' ', 'T')),
 			'presenter': e.Presenters,
 			'uri': e.URL,
 			'durationMins': parseTimeDelta(e.Duration)
@@ -64,8 +68,7 @@ $('#scheduleMain').live('pageinit', function(evt) {
 	// now determine whether to show a date list or the actual info
 	if (location.search.length >= 8) {
 
-		var day = new Date(location.search.substr(1, 10));
-		day = day.toDateString();
+		var day = moment(location.search.substr(1, 10));
 
 		// select a particular date
 		// parse the date
@@ -87,24 +90,26 @@ $('#scheduleMain').live('pageinit', function(evt) {
 			return 0;
 		});
 
-		$('#title').text(day);
+		$('#title').text(day.format('ddd do MMMM YYYY'));
+
+		day = isoDate(day);
 
 		//alert(day);
 		var lastTime = null;
 		$.each(schedule, function(i, e) {
-			if (e.start.toDateString() != day) {
+			if (isoDate(e.start) != day) {
 				// continue
 				return;
 			}
 
-			if (e.start.toLocaleTimeString() != lastTime) {
-				lastTime = e.start.toLocaleTimeString();
+			if (timeFormat(e.start) != lastTime) {
+				lastTime = timeFormat(e.start);
 				$('#scheduleList').append(
 					$('<li>').attr('data-role', 'list-divider').text(timeFormat(e.start))
 				);
 			}
 
-			var endTime = new Date(e.start.setMinutes(e.start.getMinutes() + e.durationMins));
+			var endTime = e.start.add('minutes', e.durationMins);
 			var label = e.room + ': ' + e.name + ' ' + (e.presenter ? '- ' + e.presenter : '') + ' (until ' + timeFormat(endTime) + ')';
 			if (e.uri == null) {
 				var item = $('<li>').attr('href', e.uri).text(label);
@@ -147,14 +152,14 @@ $('#scheduleMain').live('pageinit', function(evt) {
 		$.each(dates, function(i, e) {
 			$('#scheduleList').append(
 				$('<li>').append(
-					$('<a>').attr({'href': '?' + e, 'rel': 'external'}).text((new Date(e)).toDateString())
+					$('<a>').attr({'href': '?' + e, 'data-ajax': 'false'}).text(moment(e).format('dddd, do MMMM YYYY'))
 				)
 			)
 		});
 
 		$('#scheduleList').append(
 			$('<li>').append(
-				$('<a>').attr({'href': '?wat', 'rel': 'external'}).text('About / Help')
+				$('<a>').attr({'href': '?wat', 'data-ajax': 'false'}).text('About / Help')
 			)
 		);
 
