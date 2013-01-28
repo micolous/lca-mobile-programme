@@ -1,3 +1,22 @@
+/*
+lca-mobile-programme - Mobile viewer for Zookeepr schedule JSON.
+Copyright 2013 Michael Farrell
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+*/
+
 function timeFormat(input) {
 	return input.format('HH:mm');
 }
@@ -90,7 +109,7 @@ $('#scheduleMain').live('pageinit', function(evt) {
 			return 0;
 		});
 
-		$('#title').text(day.format('ddd do MMMM YYYY'));
+		$('#title').text(day.format('dddd Do MMMM YYYY'));
 
 		day = isoDate(day);
 
@@ -152,7 +171,7 @@ $('#scheduleMain').live('pageinit', function(evt) {
 		$.each(dates, function(i, e) {
 			$('#scheduleList').append(
 				$('<li>').append(
-					$('<a>').attr({'href': '?' + e, 'data-ajax': 'false'}).text(moment(e).format('dddd, do MMMM YYYY'))
+					$('<a>').attr({'href': '?' + e, 'data-ajax': 'false'}).text(moment(e).format('dddd, Do MMMM YYYY'))
 				)
 			)
 		});
