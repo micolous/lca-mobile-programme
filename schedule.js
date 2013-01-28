@@ -161,6 +161,12 @@ $('#scheduleMain').live('pageinit', function(evt) {
 			$('<li>').append(
 				$('<a>').attr({'href': '?wat', 'data-ajax': 'false'}).text('About / Help')
 			)
+		).append(
+			$('<li>').append(
+				$('<img>').attr('src', 'images/qr.png').css('margin', '2px')
+			).append(
+				$('<span>').text('http://lcamp.micolous.id.au/')
+			)
 		);
 
 	}
