@@ -97,14 +97,19 @@ function displaySchedule(date) {
 			);
 		}
 
-		var endTime = e.start.add('minutes', e.durationMins);
-		var label = e.room + ': ' + e.name + ' ' + (e.presenter ? '- ' + e.presenter : '') + ' (until ' + timeFormat(endTime) + ')';
-		if (e.uri == null) {
-			var item = $('<li>').attr('href', e.uri).text(label);
+		var label = e.room + ': ' + e.name + ' ' + (e.presenter ? '- ' + e.presenter : '') + ' (until ' + timeFormat(e.end) + ')';
+		if (e.description == '') {
+			if (e.uri == null) {
+				var item = $('<li>').text(label);
+			} else {
+				var item = $('<li>').append($('<a>').attr({'href': e.uri, 'rel': 'external'}).text(label));
+			}
 		} else {
-			var item = $('<li>').append($('<a>').attr({'href': e.uri, 'rel': 'external'}).text(label));
+			// show local description text
+			var item = $('<li>').append($('<a>').bind('click', function(evt) {
+				$('.descriptionPopup[data-event-id=' + e.id + ']').popup('open');
+			}).text(label));
 		}
-	
 		$('#scheduleList').append(item	);
 	});
 
@@ -167,12 +172,14 @@ function displayDaySelector() {
 				.bind('click', displayAbout)
 				.text('About / Help')
 		)
-	).append(
-		$('<li>').append(
-			$('<img>').attr('src', 'images/qr.png').css('margin', '2px')
-		).append(
-			$('<span>').text('http://lcamp.micolous.id.au/')
+	);
+
+	$('#scheduleContainer').append(
+		$('<p>').append(
+			$('<img>').attr('src', 'images/qr.png')
 		)
+	).append(
+		$('<p>').text('http://lcamp.micolous.id.au/')
 	);
 	endPage();
 }
@@ -194,26 +201,95 @@ $('#scheduleMain').live('pageinit', function(evt) {
 		return;
 	}
 
+	$('#descriptionContainer').trigger('destroy').empty();
 	$.each(schedule_raw, function(i, e) {
 		// reformat the object in to something that is a bit more readable
-		schedule.push({
+		var duration = parseTimeDelta(e.Duration);
+		var start = moment(e.Start.replace(' ', 'T'));
+		
+		e = {
 			'description': e.Description,
 			'id': e.Id,
 			// wat, why is there even spaces
 			'room': e['Room Name'],
 			'name': e.Title,
 			// no tzinfo on the start time, wat
-			'start': moment(e.Start.replace(' ', 'T')),
+			'start': start,
 			'presenter': e.Presenters,
 			'uri': e.URL,
-			'durationMins': parseTimeDelta(e.Duration)
+			'durationMins': duration,
+			'end': start.add('minutes', duration) 
+		}
+		schedule.push(e);
 
-		});
+		// push event descriptions into dom popups
+		if (e.description != null && e.description != '') {
+			var descriptionDiv = $('<div>')
+				.attr({
+					'data-role': 'content',
+					'data-theme': 'd',
+				})
+				.addClass('ui-corner-bottom ui-content');
+
+			var descriptionDialog = $('<div>')
+				.attr({
+					'data-role': 'popup',
+					'data-event-id': e.id,
+					'data-overlay-theme': 'a',
+					'data-theme': 'c'
+				})
+				.addClass('descriptionPopup ui-corner-all')
+				.append($('<div>')
+					.attr({
+						'data-role': 'header',
+						'data-theme': 'a'
+					})
+					.addClass('ui-corner-top')
+					.append($('<h1>')
+						.text(e.room + ': ' + e.name + ' ' + (e.presenter ? '- ' + e.presenter : '') + ' (until ' + timeFormat(e.end) + ')')
+					)
+				)
+				.append(descriptionDiv)
+				.append($('<div>')
+					.attr({
+						'data-role': 'controlgroup',
+						'data-type': 'horizontal'
+					})
+					.append($('<a>')
+						.attr({
+							'href': '#',
+							'data-role': 'button',
+							'data-icon': 'back',
+							'data-rel': 'back',
+						})
+						.text('Close')
+					)
+					.append($('<a>')
+						.attr({
+							'href': e.uri,
+							'data-role': 'button',
+							'rel': 'external',
+							'target': '_blank',
+							'data-icon': 'info'
+						})
+						.text('Read more...')
+					)
+				);
+
+			$.each(e.description.split('\n'), function(i, line) {
+				descriptionDiv.append(
+					$('<p>').text(line)
+				);
+			});
+			
+			$('#descriptionContainer').append(descriptionDialog);
+		}
 	});
+
+	$('#descriptionContainer').trigger('create');
 
 
 	// now determine whether to show a date list or the actual info
-	
 	// For campatibility, still handle these query strings.
 	if (location.search.length >= 8) {
 		displaySchedule(location.search);
