@@ -223,7 +223,9 @@ $('#scheduleMain').live('pageinit', function(evt) {
 		displayDaySelector();
 	}
 
-
+	$('#btnHome')
+		.attr('href', '#')
+		.bind('click', displayDaySelector);
 
 
 });
