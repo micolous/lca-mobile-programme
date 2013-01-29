@@ -218,7 +218,7 @@ $('#scheduleMain').live('pageinit', function(evt) {
 			'presenter': e.Presenters,
 			'uri': e.URL,
 			'durationMins': duration,
-			'end': start.add('minutes', duration) 
+			'end': moment(start).add('minutes', duration) 
 		}
 		schedule.push(e);
 
@@ -257,7 +257,6 @@ $('#scheduleMain').live('pageinit', function(evt) {
 					})
 					.append($('<a>')
 						.attr({
-							'href': '#',
 							'data-role': 'button',
 							'data-icon': 'back',
 							'data-rel': 'back',
