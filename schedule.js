@@ -121,7 +121,7 @@ function displayAbout() {
 	
 	$('#scheduleContainer').empty().append(
 		$('<p>').text(
-			'This is an unofficial service using data parsed from LCA\'s JSON calendar feed.  This information may not be current -- it is designed to be dropped onto Zookeepr later (so UI is all in Javascript).  Please direct feedback to micolous on #linux.conf.au.'
+			'This is an unofficial service using data parsed from PyCon AU\'s JSON calendar feed.  This information may not be current -- it is designed to be dropped onto Zookeepr later (so UI is all in Javascript).  Please direct feedback to micolous on Freenode #pyconau.'
 		)
 	).append(
 		$('<p>').append(
@@ -179,7 +179,7 @@ function displayDaySelector() {
 			$('<img>').attr('src', 'images/qr.png')
 		)
 	).append(
-		$('<p>').text('http://lcamp.micolous.id.au/')
+		$('<p>').text('http://pyconau.micolous.id.au/')
 	);
 	endPage();
 }
