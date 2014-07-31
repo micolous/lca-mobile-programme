@@ -207,7 +207,7 @@ $('#scheduleMain').live('pageinit', function(evt) {
 		var start = moment(e.start.replace(' ', 'T'));
 		
 		e = {
-			'description': e.description,
+			'description': e['abstract'],
 			'id': e.event_id,
 			'room': k,
 			'name': e.title,
