@@ -25,11 +25,6 @@ function timeFormat(input) {
 
 function isoDate(input) {
 	// format the date
-	// because 0-index months are a GREAT idea
-
-	//var mo = Math.abs(input.getMonth() + 1);
-	//var da = Math.abs(input.getDate());
-	//return input.getFullYear() + '-' + (mo < 10 ? '0' + mo : mo) + '-' + (da < 10 ? '0' + da : da);
 	return input.format('YYYY-MM-DD');
 }
 
@@ -137,6 +132,8 @@ function displayAbout() {
 
 function displayDaySelector() {
 	beginPage();
+	$('#title').text('Unofficial PyCon AU 2014 Mobile Programme');
+
 	// select date
 	var dates = new Array();
 	$.each(schedule, function(i, e) {
@@ -202,21 +199,22 @@ $('#scheduleMain').live('pageinit', function(evt) {
 	}
 
 	$('#descriptionContainer').trigger('destroy').empty();
-	$.each(schedule_raw, function(i, e) {
+	$.map(schedule_raw, function(v, k) {
+	
+	$.each(v, function(i, e) {
 		// reformat the object in to something that is a bit more readable
-		var duration = parseTimeDelta(e.Duration);
-		var start = moment(e.Start.replace(' ', 'T'));
+		var duration = parseTimeDelta(e.duration);
+		var start = moment(e.start.replace(' ', 'T'));
 		
 		e = {
-			'description': e.Description,
-			'id': e.Id,
-			// wat, why is there even spaces
-			'room': e['Room Name'],
-			'name': e.Title,
+			'description': e.description,
+			'id': e.event_id,
+			'room': k,
+			'name': e.title,
 			// no tzinfo on the start time, wat
 			'start': start,
-			'presenter': e.Presenters,
-			'uri': e.URL,
+			'presenter': e.presenters,
+			'uri': e.url,
 			'durationMins': duration,
 			'end': moment(start).add('minutes', duration) 
 		}
@@ -283,6 +281,7 @@ $('#scheduleMain').live('pageinit', function(evt) {
 			
 			$('#descriptionContainer').append(descriptionDialog);
 		}
+	});
 	});
 
 	$('#descriptionContainer').trigger('create');

@@ -1,2 +1,2 @@
 #!/bin/sh
-wget -O schedule.json http://2013.pycon-au.org/programme/schedule/json
+curl -o schedule.json http://2014.pycon-au.org/programme/schedule/json
