@@ -192,7 +192,7 @@ $('#scheduleMain').live('pageinit', function(evt) {
 	beginPage();
 	
 	try {
-		var schedule_req = $.ajax('./schedule.json?v=1', { async: false });
+		var schedule_req = $.ajax('./schedule.json?v=2015-1', { async: false });
 		var schedule_raw = JSON.parse(schedule_req.responseText);
 	} catch (ex) {
 		$.mobile.loading('hide');
