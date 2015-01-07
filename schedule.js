@@ -107,10 +107,17 @@ function displaySchedule(date) {
 		} else {
 			// show local description text
 			var item = $('<li>').append($('<a>').bind('click', function(evt) {
-				$('.descriptionPopup[data-event-id=' + e.id + ']').popup('open');
+				$('.descriptionPopup[data-event-id=' + e.id + ']')
+					.popup('open', {
+						positionTo: 'window',
+						transition: 'pop',
+						overlayTheme: 'b',
+						theme: 'c',
+						shadow: true,
+					});
 			}).text(label));
 		}
-		$('#scheduleList').append(item	);
+		$('#scheduleList').append(item);
 	});
 
 	endPage();
@@ -188,7 +195,7 @@ $(document).bind("mobileinit", function(){
 	$.mobile.ajaxEnabled = false;
 });
 
-$('#scheduleMain').live('pageinit', function(evt) {
+$(function(){
 	beginPage();
 	
 	try {
@@ -235,7 +242,7 @@ $('#scheduleMain').live('pageinit', function(evt) {
 				.attr({
 					'data-role': 'popup',
 					'data-event-id': e.id,
-					'data-overlay-theme': 'a',
+					'data-overlay-theme': 'b',
 					'data-theme': 'c'
 				})
 				.addClass('descriptionPopup ui-corner-all')
@@ -282,6 +289,7 @@ $('#scheduleMain').live('pageinit', function(evt) {
 			});
 			
 			$('#descriptionContainer').append(descriptionDialog);
+			descriptionDialog.trigger('create');
 		}
 	});
 
@@ -301,7 +309,6 @@ $('#scheduleMain').live('pageinit', function(evt) {
 	$('#btnHome')
 		.attr('href', '#')
 		.bind('click', displayDaySelector);
-
 
 });
 

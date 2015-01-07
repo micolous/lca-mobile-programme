@@ -1,6 +1,6 @@
 # lca mobile programme #
 
-Copyright 2013 Michael Farrell <http://micolous.id.au/>.  Licensed under the same terms as Zookeepr itself (GPL-2).  Details in the file `COPYING`.
+Copyright 2013-2015 Michael Farrell <http://micolous.id.au/>.  Licensed under the same terms as Zookeepr itself (GPL-2).  Details in the file `COPYING`.
 
 ## About ##
 
