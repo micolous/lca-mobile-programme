@@ -188,6 +188,8 @@ function displayDaySelector() {
 	).append(
 		$('<p>').text('http://lcamp.micolous.id.au/')
 	);
+	
+	$('#title').text('Unofficial LCA' + (moment(dates[0]).format('YYYY')) + ' Mobile Programme');
 	endPage();
 }
 
@@ -260,7 +262,6 @@ $(function(){
 				.append($('<div>')
 					.attr({
 						'data-role': 'controlgroup',
-						'data-type': 'horizontal'
 					})
 					.append($('<a>')
 						.attr({
