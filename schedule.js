@@ -112,7 +112,7 @@ function displaySchedule(date) {
 						positionTo: 'window',
 						transition: 'pop',
 						overlayTheme: 'b',
-						theme: 'c',
+						theme: 'a',
 						shadow: true,
 					});
 			}).text(label));
@@ -233,19 +233,19 @@ $(function(){
 		if (e.description != null && e.description != '') {
 			var descriptionDiv = $('<div>')
 				.attr({
-					'data-role': 'content',
-					'data-theme': 'd',
+					'data-role': 'main',
+					'data-theme': 'a',
 				})
-				.addClass('ui-corner-bottom ui-content');
+				.addClass('ui-content');
 
 			var descriptionDialog = $('<div>')
 				.attr({
 					'data-role': 'popup',
 					'data-event-id': e.id,
 					'data-overlay-theme': 'b',
-					'data-theme': 'c'
+					'data-theme': 'a'
 				})
-				.addClass('descriptionPopup ui-corner-all')
+				.addClass('descriptionPopup')
 				.append($('<div>')
 					.attr({
 						'data-role': 'header',
