@@ -1,7 +1,9 @@
 all: schedule.json
 
 schedule.json:
-	./update_schedule.sh
+	curl -o schedule.json http://linux.conf.au/programme/schedule/json
 
 devserver:
 	python -m SimpleHTTPServer
+
+.PHONY: schedule.json devserver
