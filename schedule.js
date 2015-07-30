@@ -1,6 +1,6 @@
 /*
 lca-mobile-programme - Mobile viewer for Zookeepr schedule JSON.
-Copyright 2013 Michael Farrell
+Copyright 2013-2015 Michael Farrell
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -132,7 +132,7 @@ function displayAbout() {
 
 function displayDaySelector() {
 	beginPage();
-	$('#title').text('Unofficial PyCon AU 2014 Mobile Programme');
+	$('#title').text('Unofficial PyCon AU 2015 Mobile Programme');
 
 	// select date
 	var dates = new Array();
