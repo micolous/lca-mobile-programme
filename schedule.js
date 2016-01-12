@@ -1,6 +1,6 @@
 /*
 lca-mobile-programme - Mobile viewer for Zookeepr schedule JSON.
-Copyright 2013 Michael Farrell
+Copyright 2013-2016 Michael Farrell
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
