@@ -189,7 +189,7 @@ function displayDaySelector() {
 		$('<p>').text('http://lcamp.micolous.id.au/')
 	);
 	
-	$('#title').text('Pycon AU 2016' + (moment(dates[0]).format('YYYY')) + ' Mobile Programme');
+	$('#title').text('Pycon AU' + (moment(dates[0]).format('YYYY')) + ' Mobile Programme');
 	endPage();
 }
 
