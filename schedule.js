@@ -186,7 +186,7 @@ function displayDaySelector() {
 			$('<img>').attr('src', 'images/qr.png')
 		)
 	).append(
-		$('<p>').text('http://lcamp.micolous.id.au/')
+		$('<p>').text('http://schedule.pycon-au.org/')
 	);
 	
 	$('#title').text('Pycon AU ' + (moment(dates[0]).format('YYYY')) + ' Mobile Programme');
