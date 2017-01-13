@@ -178,8 +178,10 @@ function displayDaySelector() {
 	$('#scheduleContainer').append(
 		$('<p>').append(
 			$('<img>').attr('src', 'images/qr.png')
-		)
-	).append(
+		),
+		$('<p>').append(
+			$('<strong>').text('Celebrating five LCAs of lca-mobile-programme -- 2013 ~ 2017 ;)')
+		),
 		$('<p>').text('http://lcamp.micolous.id.au/')
 	);
 	
