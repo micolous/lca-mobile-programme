@@ -1,7 +1,7 @@
 all: schedule.json
 
 schedule.json:
-	curl -o schedule.json http://linux.conf.au/programme/schedule/json
+	curl -o schedule.json https://linux.conf.au/schedule/conference.json
 
 devserver:
 	python -m SimpleHTTPServer
