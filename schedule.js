@@ -127,7 +127,7 @@ function displayAbout() {
 	).append(
 		$('<p>').append(
 			$('<a>').attr({
-				'href': 'https://github.com/micolous/lca-mobile-programme/tree/lca2017',
+				'href': 'https://github.com/micolous/lca-mobile-programme/tree/lca2018',
 				'rel': 'external'
 			}).text('Git repository')
 		)
@@ -185,7 +185,7 @@ function displayDaySelector() {
         .attr('href', 'https://rego.linux.conf.au/schedule/')
         .text('Try it out!')
 		),
-		$('<p>').text('http://lcamp.micolous.id.au/')
+		$('<p>').text('https://lcamp.micolous.id.au/')
 	);
 	
 	$('#title').text('Unofficial LCA' + (moment(dates[0]).format('YYYY')) + ' Mobile Programme');
