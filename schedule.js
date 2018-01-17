@@ -180,7 +180,10 @@ function displayDaySelector() {
 			$('<img>').attr('src', 'images/qr.png')
 		),
 		$('<p>').append(
-			$('<strong>').text('Celebrating six LCAs of my rejected pull requests being ignored -- 2013 ~ 2018 ;)')
+			$('<strong>').text('Did you know that LCA 2018\'s website is fairly mobile friendly this year? '),
+      $('<a>')
+        .attr('href', 'https://rego.linux.conf.au/schedule/')
+        .text('Try it out!')
 		),
 		$('<p>').text('http://lcamp.micolous.id.au/')
 	);
