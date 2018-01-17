@@ -1,6 +1,6 @@
 /*
 lca-mobile-programme - Mobile viewer for Symposion schedule JSON.
-Copyright 2013-2017 Michael Farrell
+Copyright 2013-2018 Michael Farrell
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -180,7 +180,7 @@ function displayDaySelector() {
 			$('<img>').attr('src', 'images/qr.png')
 		),
 		$('<p>').append(
-			$('<strong>').text('Celebrating five LCAs of lca-mobile-programme -- 2013 ~ 2017 ;)')
+			$('<strong>').text('Celebrating six LCAs of my rejected pull requests being ignored -- 2013 ~ 2018 ;)')
 		),
 		$('<p>').text('http://lcamp.micolous.id.au/')
 	);
