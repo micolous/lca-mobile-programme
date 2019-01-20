@@ -180,7 +180,7 @@ function displayDaySelector() {
 			$('<img>').attr('src', 'images/qr.png')
 		),
 		$('<p>').append(
-			$('<strong>').text('Did you know that LCA 2018\'s website is fairly mobile friendly this year? '),
+			$('<strong>').text('Did you know that LCA 2019\'s website is fairly mobile friendly this year? '),
       $('<a>')
         .attr('href', 'https://rego.linux.conf.au/schedule/')
         .text('Try it out!')
@@ -200,7 +200,7 @@ $(function(){
 	beginPage();
 	
 	try {
-		var schedule_req = $.ajax('./schedule.json?r=' + Math.random(), { async: false });
+		var schedule_req = $.ajax('./schedule.json?r=' + ((new Date()).getTime() / 30000), { async: false });
 		var schedule_raw = JSON.parse(schedule_req.responseText);
 	} catch (ex) {
 		$.mobile.loading('hide');
@@ -219,7 +219,7 @@ $(function(){
 					authors += ', ';
 				}
 			
-				authors += a;
+				authors += a.name;
 			});
 		}
 		
