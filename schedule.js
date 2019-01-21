@@ -127,7 +127,7 @@ function displayAbout() {
 	).append(
 		$('<p>').append(
 			$('<a>').attr({
-				'href': 'https://github.com/micolous/lca-mobile-programme/tree/lca2018',
+				'href': 'https://github.com/micolous/lca-mobile-programme/tree/lca2019',
 				'rel': 'external'
 			}).text('Git repository')
 		)
