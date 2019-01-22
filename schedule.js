@@ -38,12 +38,31 @@ function parseTimeDelta(input) {
 function beginPage() {
 	$.mobile.loading('show', {text: 'Loading the schedule...', textVisible: true});
 	$('#scheduleContainer').empty().trigger('destroy').append(
-		$('<ul>').attr({'data-role': 'listview', 'id': 'scheduleList'}).addClass('ui-listview')
+		$('<form>')
+			.attr('id', 'searchForm')
+			.css({
+				'display': 'none',
+				'padding-bottom': '1em',
+			})
+			.append(
+				$('<input>').attr({
+					'type': 'text',
+					'data-type': 'search',
+					'id': 'searchBox',
+				})
+			),
+		$('<ul>').attr({
+			'data-role': 'listview',
+			'id': 'scheduleList',
+			'data-filter': 'true',
+			'data-input': '#searchBox',
+		}).addClass('ui-listview')
 	);
 }
 
 function endPage() {
 	$('#scheduleContainer').trigger('create');
+	$('#scheduleList').filterable('refresh');
 	$.mobile.loading('hide');
 }
 
@@ -103,17 +122,18 @@ function displaySchedule(date) {
 						theme: 'a',
 						shadow: true,
 					});
-			}).text(label));
+			}).text(label)).attr('data-filtertext', label);
 		} else {
 			if (e.uri == null) {
-				var item = $('<li>').text(label);
+				var item = $('<li>').text(label).attr('data-filtertext', label);
 			} else {
-				var item = $('<li>').append($('<a>').attr({'href': e.uri, 'rel': 'external'}).text(label));
+				var item = $('<li>').append($('<a>').attr({'href': e.uri, 'rel': 'external'}).text(label)).attr('data-filtertext', label);
 			}
 		}
 		$('#scheduleList').append(item);
 	});
 
+	$('#searchForm').css('display', '');
 	endPage();
 }
 
