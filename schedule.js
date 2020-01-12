@@ -1,6 +1,6 @@
 /*
 lca-mobile-programme - Mobile viewer for Symposion schedule JSON.
-Copyright 2013-2018 Michael Farrell
+Copyright 2013-2020 Michael Farrell
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -147,7 +147,7 @@ function displayAbout() {
 	).append(
 		$('<p>').append(
 			$('<a>').attr({
-				'href': 'https://github.com/micolous/lca-mobile-programme/tree/lca2019',
+				'href': 'https://github.com/micolous/lca-mobile-programme/tree/lca2020',
 				'rel': 'external'
 			}).text('Git repository')
 		)
@@ -200,9 +200,9 @@ function displayDaySelector() {
 			$('<img>').attr('src', 'images/qr.png')
 		),
 		$('<p>').append(
-			$('<strong>').text('Did you know that LCA 2019\'s website is fairly mobile friendly this year? '),
+			$('<strong>').text('Did you know that LCA 2020\'s website is fairly mobile friendly this year? '),
       $('<a>')
-        .attr('href', 'https://rego.linux.conf.au/schedule/')
+        .attr('href', 'https://linux.conf.au/schedule/')
         .text('Try it out!')
 		),
 		$('<p>').text('https://lcamp.micolous.id.au/')
